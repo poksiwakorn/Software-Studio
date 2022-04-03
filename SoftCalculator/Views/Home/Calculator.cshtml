@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Calculator";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<label class="topicLabel" style="margin-right: 25px;">First Number : </label>
+<input class="inputText" style="border-color: #009578;" type="text" id="firstNum" name="firstNum" value="0"><br>
+
+<label class="topicLabel" style="margin-right: 71px;">operands : </label>
+<div class="radio" id="operand" type="operand">
+  <input class="radioInput" type="radio" value="+" name="myRadio" id="myRadio1" checked>
+  <label class="radioLabel" for="myRadio1">+</label>
+  <input class="radioInput" type="radio" value="-" name="myRadio" id="myRadio2">
+  <label class="radioLabel" for="myRadio2">-</label>
+  <input class="radioInput" type="radio" value="x" name="myRadio" id="myRadio3">
+  <label class="radioLabel" for="myRadio3">x</label>
+  <input class="radioInput" type="radio" value="/" name="myRadio" id="myRadio4">
+  <label class="radioLabel" for="myRadio4">/</label>
+</div><br>
+
+<label class="topicLabel" style="margin-right: 3px;">Second Number : </label>
+<input class="inputText" style="border-color: #009578;" type="text" id="secondNum" name="secondNum" value="0"><br>
+
+<button class="button" id="cal" type="cal">=</button>
+
+<input class="inputText" style="margin-left: 3px; border-color: #2596be;" type="text" id="resultNum" name="resultNum" value="0" readonly><br>
+
+@section Scripts{
+<script>
+    $(() => {
+        $("#cal").click(() => {
+            const firstNumVal = document.querySelector("#firstNum").value
+            const secondNumVal = document.querySelector("#secondNum").value
+            var operands = document.getElementsByName("myRadio");
+            var operand = "0";
+
+            for(i=0;i<operands.length;i++){
+                if(operands[i].checked){
+                    operand = operands[i].value;
+                }
+            }
+
+            const cal = document.querySelector("#cal")
+            const firstNum = document.querySelector("#firstNum")
+            const secondNum = document.querySelector("#secondNum")
+            const result = document.querySelector("#resultNum")
+
+            data = {
+                'firstNum': firstNumVal || "0", 
+                'secondNum': secondNumVal || "0", 
+                'operand': operand
+            }
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Calculate")',
+                data: data,
+                dataType: "json",
+                success: function(e){
+                    result.value = e;
+                    firstNum.value = e;
+                    secondNum.value = "0";
+                },
+                error: function(){
+                    alert("Error");
+                }
+            });
+        });
+    });
+</script>
+}

@@ -1,0 +1,76 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.btn-group{
+  display: inline-flex;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.button{
+  padding: 10px 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: #2596be;
+  font-size: 20px;
+  color: #ffffff;
+  border-right: 1px solid #cccccc;
+}
+
+.button:last-child{
+  border-right: none;
+}
+
+.button:hover{
+  background: #154c79;
+}
+
+.radio{
+  display: inline-flex;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+.radioInput{
+  display: none;
+}
+
+.radioLabel{
+  padding: 8px 14px;
+  font-size: 20px;
+  color: #ffffff;
+  background: #009578;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.radioInput:checked + .radioLabel{
+  background: #006B56;
+}
+
+.inputText{
+  margin: 15px 0px 15px 0px;
+}
+
+.topicLabel{
+  font-weight: bold;
+}
